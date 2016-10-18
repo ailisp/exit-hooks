@@ -1,9 +1,11 @@
+
 ;;;; If tested on *slime-repl*, the output will be in *inferior-lisp*,
 ;;;; which may seems not correct at first glance. But it's because the
 ;;;; displace of *inferior-lisp* is not correct for exit, the actual
 ;;;; function calling is correct. Try to directly tested on
 ;;;; *inferior-lisp* (paste the following to *inferior-lisp* you will
 ;;;; see correct result.
+(in-package :cl-user)
 (ql:quickload :exit-hooks)
 
 (exit-hooks:add-exit-hook #'(lambda () (print -2)))
