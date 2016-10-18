@@ -1,0 +1,25 @@
+* exit-hooks
+exit-hooks provide a portable way to automatically call some user defined function when exit Common Lisp. Like Python's atexit.
+** Installation
+#+BEGIN_SRC lisp
+(ql:quickload :exit-hooks)
+
+#+END_SRC
+
+** Usage
+To add a function called when Common Lisp exits:
+#+BEGIN_SRC lisp
+(exit-hooks:add-exit-hook #'func)
+#+END_SRC
+The function func must be of 0 arguments. You can specify the calling sequence by call ~(exit-hooks:add-exit-hook #'func priority)~. Here priority is a integer, smaller will be called first. Default priority is 0. Function with same priority will be called in the reverse order of the sequence they are added.
+To delete a function when exits:
+#+BEGIN_SRC lisp
+(exit-hooks:delete-exit-hook priority)
+#+END_SRC
+This will delete all exit hook functions with given priority. (Since you may put lambda when adding, and they can't be selected via function comparison, so delete with given priority is reasonable.)
+
+** Support Implementations
+Currently, exit-hooks support the following implementation:
+- Steel Bank Common Lisp (SBCL)
+- Clozure Common Lisp (CCL)
+- Embedded Common Lisp (ECL) 
