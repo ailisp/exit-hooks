@@ -4,6 +4,7 @@
 ;;;; function calling is correct. Try to directly tested on
 ;;;; *inferior-lisp* (paste the following to *inferior-lisp* you will
 ;;;; see correct result.
+(ql:quickload :exit-hooks)
 
 (exit-hooks:add-exit-hook #'(lambda () (print -2)))
 (exit-hooks:add-exit-hook #'(lambda () (print -1)))
