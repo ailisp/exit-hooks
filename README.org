@@ -1,5 +1,5 @@
 * exit-hooks
-exit-hooks provide a portable way to automatically call some user defined function when exit Common Lisp. Like Python's atexit.
+exit-hooks provide a portable way to automatically call some user defined function when exit Common Lisp. Like Python's atexit. If you want something to deal all kinds of handling capability you may have a look at [[trivial-signal][https://github.com/guicho271828/trivial-signal]].
 ** Installation
 #+BEGIN_SRC lisp
 (ql:quickload :exit-hooks)
