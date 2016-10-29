@@ -27,3 +27,6 @@ Currently, exit-hooks support the following implementation:
 
 ** A Little Note for Using
 Note when testing for sbcl via slime, you need to directly enter (quit) in *inferior-lisp*, or directly use kill from shell, not *slime-repl sbcl* (which will has no effect. For ccl and abcl there is no this issue. For ecl, I only tested directly from it's repl, because I have problem in configuring it for slime.
+
+** Acknowledgements
+Thanks to Vibhu Mohindra from ABCL mail list and R. Matthew Emerson from OpenMCL mail list. They provide methods for exit-hooks for ABCL and CCL.
