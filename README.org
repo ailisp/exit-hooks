@@ -1,5 +1,5 @@
 * exit-hooks
-exit-hooks provide a portable way to automatically call some user defined function when exit Common Lisp. Like Python's ~atexit~ or Java's ~Runtime.addExitHook()~. It currently support SBCL, CCL, ECL and ABCL. If you want something to deal all kinds of handling capability you may have a look at [[https://github.com/guicho271828/trivial-signal][trivial-signal]].
+exit-hooks provide a portable way to automatically call some user defined function when exit Common Lisp. Like Python's ~atexit~ or Java's ~Runtime.addShutdownHook()~. It currently support SBCL, CCL, ECL and ABCL. Before exit-hooks, there is no portable way to doing so and not staightforward way to use an exit hook under ABCL. It can be used for parmenantly save something to file or database or send some socket when Lisp accidentally exit, and it's useful for persistent saving or cleanup at exit. If you want something to deal all kinds of handling capability you may have a look at [[https://github.com/guicho271828/trivial-signal][trivial-signal]].
 ** Installation
 #+BEGIN_SRC lisp
 (ql:quickload :exit-hooks)
