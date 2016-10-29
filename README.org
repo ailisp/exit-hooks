@@ -1,5 +1,5 @@
 * exit-hooks
-exit-hooks provide a portable way to automatically call some user defined function when exit Common Lisp. Like Python's atexit. If you want something to deal all kinds of handling capability you may have a look at [[https://github.com/guicho271828/trivial-signal][trivial-signal]].
+exit-hooks provide a portable way to automatically call some user defined function when exit Common Lisp. Like Python's ~atexit~ or Java's ~Runtime.addExitHook()~. It currently support SBCL, CCL, ECL and ABCL. If you want something to deal all kinds of handling capability you may have a look at [[https://github.com/guicho271828/trivial-signal][trivial-signal]].
 ** Installation
 #+BEGIN_SRC lisp
 (ql:quickload :exit-hooks)
@@ -23,3 +23,7 @@ Currently, exit-hooks support the following implementation:
 - Steel Bank Common Lisp (SBCL)
 - Clozure Common Lisp (CCL)
 - Embedded Common Lisp (ECL) 
+- Armed Bear Common Lisp (ABCL)
+
+** A Little Note for Using
+Note when testing for sbcl via slime, you need to directly enter (quit) in *inferior-lisp*, or directly use kill from shell, not *slime-repl sbcl* (which will has no effect. For ccl and abcl there is no this issue. For ecl, I only tested directly from it's repl, because I have problem in configuring it for slime.
