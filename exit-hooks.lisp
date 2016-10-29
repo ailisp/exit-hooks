@@ -26,5 +26,13 @@
 #+ecl (progn
 	(setf si:*exit-hooks* nil)
 	(push #'%exit-hook-controller% si:*exit-hooks*))
-#-(or sbcl ccl ecl)
+#+abcl (progn
+	 (defparameter *exit-hook-thread*
+	   (java:jnew-runtime-class "ExitHookThread" :superclass "java.lang.Thread"
+				    :methods `(("run" :void () ,#'(lambda (this)
+								    (declare (ignore this))
+								    (funcall #'%exit-hook-controller%))))))
+	 (java:jcall "addShutdownHook" (java:jstatic "getRuntime" "java.lang.Runtime")
+		     (java:jnew *exit-hook-thread*)))
+#-(or sbcl ccl ecl abcl)
 (error "Not implement.")
