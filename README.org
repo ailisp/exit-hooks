@@ -1,5 +1,6 @@
 * exit-hooks
-exit-hooks provide a portable way to automatically call some user defined function when exit Common Lisp. Like Python's ~atexit~ or Java's ~Runtime.addShutdownHook()~. It currently support SBCL, CCL, ECL and ABCL. Before exit-hooks, there is no portable way to doing so and not staightforward way to use an exit hook under ABCL. It can be used for parmenantly save something to file or database or send some socket when Lisp accidentally exit, and it's useful for persistent saving or cleanup at exit. If you want something to deal all kinds of handling capability you may have a look at [[https://github.com/guicho271828/trivial-signal][trivial-signal]].
+exit-hooks provide a portable way to automatically call some user defined function when exit Common Lisp (Both ~(quit)~ from REPL or kill in shell). Like Python's ~atexit~ or Java's ~Runtime.addShutdownHook()~. It currently support SBCL, CCL, ECL, ABCL, Allegro CL, clisp and CMUCL. Before exit-hooks, there is no portable way to doing so and no staightforward way to use an exit hook on ABCL. It can be used for tasks like parmenantly save something when exit Lisp.
+
 ** Installation
 #+BEGIN_SRC lisp
 (ql:quickload :exit-hooks)
@@ -7,26 +8,16 @@ exit-hooks provide a portable way to automatically call some user defined functi
 #+END_SRC
 
 ** Usage
-To add a function called when Common Lisp exits:
+To add a function FUNC called when Common Lisp exits:
 #+BEGIN_SRC lisp
 (exit-hooks:add-exit-hook #'func)
 #+END_SRC
-The function func must be of 0 arguments. You can specify the calling sequence by call ~(exit-hooks:add-exit-hook #'func priority)~. Here priority is a integer, smaller will be called first. Default priority is 0. Function with same priority will be called in the reverse order of the sequence they are added.
-To delete a function when exits:
-#+BEGIN_SRC lisp
-(exit-hooks:delete-exit-hook priority)
-#+END_SRC
-This will delete all exit hook functions with given priority. (Since you may put lambda when adding, and they can't be selected via function comparison, so delete with given priority is reasonable.)
+The function FUNC must be of zero arguments. If several functions are added this way, their calling sequence is not specified. If you want to call them in a specific sequence, you can simply wrap them into a single function and add it.
 
-** Support Implementations
-Currently, exit-hooks support the following implementation:
-- Steel Bank Common Lisp (SBCL)
-- Clozure Common Lisp (CCL)
-- Embedded Common Lisp (ECL) 
-- Armed Bear Common Lisp (ABCL)
-
-** A Little Note for Using
-Note when testing for sbcl via slime, you need to directly enter (quit) in *inferior-lisp*, or directly use kill from shell, not *slime-repl sbcl* (which will has no effect. For ccl and abcl there is no this issue. For ecl, I only tested directly from it's repl, because I have problem in configuring it for slime.
+To visit current exit hooks and delete one, you just need to modify variable ~exit-hooks:*exit-hooks*~, it's a list contains current exit hooks. 
 
 ** Acknowledgements
-Thanks to Vibhu Mohindra from ABCL mail list and R. Matthew Emerson from OpenMCL mail list. They provide methods for exit-hooks for ABCL and CCL.
+Thanks to Vibhu Mohindra from ABCL mail list and R. Matthew Emerson from OpenMCL mail list. They provide methods for exit-hooks for ABCL and CCL. And Jocelyn Fréchot gives many useful suggestions and support for clisp, Allegro CL and CMUCL. 
+
+** Limitations
+For some implementation, for example SBCL, when you are using SLIME, you need to exit Lisp in ~*inferior-lisp*~, not ~*slime-repl*~. If you directly run Lisp from shell, not in SLIME, there is no problem. Currently exit-hooks support most of popular Lisp implementations, but not all. If your implementation is not supported and you know how to do that, please tell me. Your work maybe helpful to other fellow Lispers. And this Library only provide a calling function when exit Lisp. Previous version of exit-hooks provide ability to add exit hooks with calling priority, but this can be easily done by wrap several functions into a single one and most people only want a portable layer so this is removed. If you want something to deal all kinds of OS signal handling capability you may have a look at [[https://github.com/guicho271828/trivial-signal][trivial-signal]].

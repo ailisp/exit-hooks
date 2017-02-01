@@ -4,5 +4,5 @@
 (defpackage #:exit-hooks
   (:use #:cl)
   (:export #:add-exit-hook
-	   #:delete-exit-hook))
+	   #:*exit-hooks*))
 

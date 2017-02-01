@@ -6,7 +6,6 @@
   :license "BSD"
   :serial t
   :components ((:file "package")
-	       (:file "util")
                (:file "exit-hooks")))
 
 
