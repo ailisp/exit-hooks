@@ -30,4 +30,6 @@
     #+cmu lisp::*cleanup-functions*)
 
 (defun add-exit-hook (func)
-  (push func *exit-hooks*))
+  (push #+allegro (list 'funcall func) 
+	#-allegro func
+        *exit-hooks*))
