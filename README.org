@@ -14,7 +14,7 @@ To add a function FUNC called when Common Lisp exits:
 #+END_SRC
 The function FUNC must be of zero arguments. If several functions are added this way, their calling sequence is not specified. If you want to call them in a specific sequence, you can simply wrap them into a single function and add it.
 
-To visit current exit hooks and delete one, you just need to modify variable ~exit-hooks:*exit-hooks*~, it's a list contains current exit hooks. 
+To visit current exit hooks or delete one, you can visit or delete elements from variable ~exit-hooks:*exit-hooks*~, it's a list contains current exit hooks. But you should not add exit hooks by adding elements to ~*exit-hooks*~, use ~add-exit-hook~ only, because elements in ~*exit-hooks*~ is implementation specific. 
 
 ** Acknowledgements
 Thanks to Vibhu Mohindra from ABCL mail list and R. Matthew Emerson from OpenMCL mail list. They provide methods for exit-hooks for ABCL and CCL. And Jocelyn Fréchot gives many useful suggestions and support for clisp, Allegro CL and CMUCL. 
