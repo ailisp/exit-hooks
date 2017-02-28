@@ -1,5 +1,5 @@
 * exit-hooks
-exit-hooks provide a portable way to automatically call some user defined function when exit Common Lisp (Both ~(quit)~ from REPL or kill in shell). Like Python's ~atexit~ or Java's ~Runtime.addShutdownHook()~. It currently support SBCL, CCL, ECL, ABCL, Allegro CL, clisp and CMUCL. Before exit-hooks, there is no portable way to doing so and no staightforward way to use an exit hook on ABCL. It can be used for tasks like parmenantly save something when exit Lisp.
+exit-hooks provide a portable way to automatically call some user defined function when exit Common Lisp (Both ~(quit)~ from REPL or kill in shell). Like ~atexit~ in C and Python or Java's ~Runtime.addShutdownHook()~. It currently support SBCL, CCL, ECL, ABCL, Allegro CL, clisp and CMUCL. Before exit-hooks, there is no portable way to doing so and no staightforward way to use an exit hook on ABCL. It can be used for tasks like parmenantly save something when exit Lisp.
 
 ** Installation
 #+BEGIN_SRC lisp
